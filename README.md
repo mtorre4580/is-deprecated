@@ -1,8 +1,17 @@
 # is-deprecated
 
-Runtime deprecation warnings for functions, methods, properties and classes, for **Node and the browser**, with **TypeScript types**, **decorators**, **telemetry hooks** and **warn / throw / silent** modes. Zero dependencies.
+[![npm version](https://img.shields.io/npm/v/@mtorre4580/is-deprecated.svg)](https://www.npmjs.com/package/@mtorre4580/is-deprecated)
+[![npm downloads](https://img.shields.io/npm/dm/@mtorre4580/is-deprecated.svg)](https://www.npmjs.com/package/@mtorre4580/is-deprecated)
+[![bundle size](https://img.shields.io/bundlejs/size/@mtorre4580/is-deprecated)](https://bundlejs.com/?q=@mtorre4580/is-deprecated)
+[![CI](https://github.com/mtorre4580/is-deprecated/actions/workflows/node.js.yml/badge.svg)](https://github.com/mtorre4580/is-deprecated/actions/workflows/node.js.yml)
+[![types](https://img.shields.io/npm/types/@mtorre4580/is-deprecated.svg)](https://www.npmjs.com/package/@mtorre4580/is-deprecated)
+[![license](https://img.shields.io/npm/l/@mtorre4580/is-deprecated.svg)](./LICENSE)
 
-<img width="128" height="128" src="https://github.com/mtorre4580/is-deprecated/blob/main/deprecated.png?raw=true" />
+**Deprecate functions, methods, properties and classes in JavaScript and TypeScript** with runtime deprecation warnings that tell developers what to use instead, since when, and from where they are calling the old API.
+
+Works in **Node and the browser**, ships **TypeScript types**, supports **decorators** (TC39 and `experimentalDecorators`), **telemetry hooks** and **warn / throw / silent** modes. Zero dependencies, ~2 kB gzip. A modern alternative to `depd`, `util-deprecate` and Node's `util.deprecate`.
+
+<img width="128" height="128" alt="is-deprecated logo: deprecation warnings for JavaScript and TypeScript" src="https://raw.githubusercontent.com/mtorre4580/is-deprecated/main/deprecated.png" />
 
 ```
 npm i @mtorre4580/is-deprecated
@@ -22,7 +31,7 @@ getUsers();
 // Called from file:///app/src/routes.ts:12:3
 ```
 
-## Why this one
+## Comparison with depd, util-deprecate and util.deprecate
 
 | | is-deprecated | [depd](https://www.npmjs.com/package/depd) | [util-deprecate](https://www.npmjs.com/package/util-deprecate) | Node `util.deprecate` |
 |---|:-:|:-:|:-:|:-:|
@@ -167,6 +176,41 @@ Behavior changes in 1.0:
 - The default message is generated from the metadata instead of `"This will be deprecated soon"`.
 - `sendMetrics` now receives the event object.
 - In CommonJS, `require()` returns the module namespace: use `const { deprecate } = require('@mtorre4580/is-deprecated')`.
+
+## FAQ
+
+### How do I deprecate a function in JavaScript or TypeScript?
+
+Wrap it with `deprecate()` and export the wrapper. Add a `/** @deprecated */` JSDoc tag too, so editors strike it through:
+
+```ts
+/** @deprecated Use getUsersV2() */
+export const getUsers = deprecate(getUsersImpl, { replacement: 'getUsersV2()' });
+```
+
+### How do I show a deprecation warning in the browser?
+
+Use the same API: outside Node the warning is printed with `console.warn`, including the call site. `depd` and `util.deprecate` do nothing in browsers.
+
+### How do I deprecate a method of a class with a decorator?
+
+Use `@Deprecated()` on the method, getter, setter, `accessor` or the whole class. It works with TypeScript 5+ standard decorators and with `experimentalDecorators` (Angular, NestJS).
+
+### How do I deprecate an object property or a config option?
+
+Use `deprecateProperty(obj, 'option', { replacement: 'newOption' })`: reading or writing it warns.
+
+### How do I make CI fail when deprecated APIs are used?
+
+Run with `IS_DEPRECATED_MODE=throw` (or `node --throw-deprecation`), or call `configure({ mode: 'throw' })` in your test setup.
+
+### How do I know when it is safe to remove a deprecated API?
+
+Send `onDeprecation` events to your metrics. They still fire in `silent` mode, so you can measure usage in production without printing warnings.
+
+### What is the difference between `@deprecated` in JSDoc and this library?
+
+The JSDoc tag is static: it only shows up in editors and linters (`@typescript-eslint/no-deprecated`). This library warns at runtime, so it also reaches plain JavaScript users, dynamic calls and people who never read the editor hint. Use both.
 
 ## License
 
