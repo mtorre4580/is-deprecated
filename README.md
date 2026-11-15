@@ -6,10 +6,13 @@
 [![CI](https://github.com/mtorre4580/is-deprecated/actions/workflows/node.js.yml/badge.svg)](https://github.com/mtorre4580/is-deprecated/actions/workflows/node.js.yml)
 [![types](https://img.shields.io/npm/types/@mtorre4580/is-deprecated.svg)](https://www.npmjs.com/package/@mtorre4580/is-deprecated)
 [![license](https://img.shields.io/npm/l/@mtorre4580/is-deprecated.svg)](./LICENSE)
+[![docs](https://img.shields.io/badge/docs-API%20reference-blue)](https://mtorre4580.github.io/is-deprecated/)
 
 **Deprecate functions, methods, properties and classes in JavaScript and TypeScript** with runtime deprecation warnings that tell developers what to use instead, since when, and from where they are calling the old API.
 
 Works in **Node and the browser**, ships **TypeScript types**, supports **decorators** (TC39 and `experimentalDecorators`), **telemetry hooks** and **warn / throw / silent** modes. Zero dependencies, ~2 kB gzip. A modern alternative to `depd`, `util-deprecate` and Node's `util.deprecate`.
+
+📖 **[API documentation](https://mtorre4580.github.io/is-deprecated/)**: every function, option and type, with examples.
 
 <img width="128" height="128" alt="is-deprecated logo: deprecation warnings for JavaScript and TypeScript" src="https://raw.githubusercontent.com/mtorre4580/is-deprecated/main/deprecated.png" />
 
@@ -51,6 +54,8 @@ getUsers();
 If you only target Node and need to deprecate a single function, `util.deprecate` is perfectly fine. Use this library when you ship code to browsers, want typed metadata, decorators or telemetry.
 
 ## API
+
+Full reference with every type: **[mtorre4580.github.io/is-deprecated](https://mtorre4580.github.io/is-deprecated/)**.
 
 ### `deprecate(fn, options?)`
 

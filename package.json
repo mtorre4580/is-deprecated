@@ -1,6 +1,6 @@
 {
   "name": "@mtorre4580/is-deprecated",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Deprecate functions, methods, properties and classes with runtime deprecation warnings. Node + browser, TypeScript, decorators. A modern depd / util.deprecate alternative.",
   "license": "MIT",
   "repository": {
