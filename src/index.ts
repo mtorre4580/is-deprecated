@@ -10,6 +10,7 @@ export {
   resetDeprecations,
 } from './core';
 export { Deprecated } from './decorator';
+export type { AnyFunction } from './core';
 export type {
   DeprecationEvent,
   DeprecationMode,

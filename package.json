@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/mtorre4580/is-deprecated.git"
   },
-  "homepage": "https://github.com/mtorre4580/is-deprecated#readme",
+  "homepage": "https://mtorre4580.github.io/is-deprecated/",
   "bugs": {
     "url": "https://github.com/mtorre4580/is-deprecated/issues"
   },
@@ -67,7 +67,8 @@
     "check:package": "publint && attw --pack . --profile node16",
     "size": "size-limit",
     "prepublishOnly": "npm run typecheck && npm run test && npm run build && npm run check:package",
-    "update-changelog": "git fetch && auto-changelog"
+    "update-changelog": "git fetch && auto-changelog",
+    "docs": "typedoc"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
@@ -84,6 +85,7 @@
     "publint": "^0.3.25",
     "size-limit": "^14.3.0",
     "tsup": "^9.0.0",
+    "typedoc": "^0.28.20",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.72.2",
     "vitest": "^5.1.0"

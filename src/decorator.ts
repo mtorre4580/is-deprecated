@@ -98,10 +98,12 @@ function decorateLegacy(
  * `experimentalDecorators` (Angular, NestJS...).
  *
  * @example
+ * ```ts
  * class Api {
  *   \@Deprecated({ since: '1.2.0', replacement: 'Api.getUsersV2()' })
  *   getUsers() {}
  * }
+ * ```
  */
 export function Deprecated(options: DeprecationOptions = {}): any {
   return function deprecatedDecorator(value: any, context?: unknown, descriptor?: PropertyDescriptor): any {
