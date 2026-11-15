@@ -1,4 +1,4 @@
-name: Node.js CI
+name: CI
 
 on:
   push:
@@ -6,22 +6,42 @@ on:
   pull_request:
     branches: ["main"]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+permissions:
+  contents: read
 
+jobs:
+  test:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]
-
+        node-version: [22.x, 24.x, 26.x]
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: npm i
-      - run: npm run test:ci
-      - run: npm run build --if-present
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test:coverage
+      - run: npm run build
+      - run: npm run check:package
+      - run: npm run size
 
+  # The published bundle has no Node APIs and targets ES2020: check it still loads on Node 18.
+  runtime-node18:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+          cache: npm
+      - run: npm ci && npm run build
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+      - run: node -e "const { deprecate } = require('./dist/index.cjs'); deprecate(() => 1, { name: 'smoke' })()"
+      - run: node --input-type=module -e "const { deprecate } = await import('./dist/index.js'); deprecate(() => 1, { name: 'smoke' })()"
