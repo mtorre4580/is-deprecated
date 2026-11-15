@@ -1,7 +1,7 @@
 {
   "name": "@mtorre4580/is-deprecated",
-  "version": "1.0.0",
-  "description": "Runtime deprecation warnings for functions, methods, properties and classes: Node + browser, TypeScript, decorators, telemetry hooks and warn/throw/silent modes",
+  "version": "1.0.1",
+  "description": "Deprecate functions, methods, properties and classes with runtime deprecation warnings. Node + browser, TypeScript, decorators. A modern depd / util.deprecate alternative.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -12,15 +12,26 @@
     "url": "https://github.com/mtorre4580/is-deprecated/issues"
   },
   "keywords": [
-    "deprecated",
     "deprecate",
+    "deprecated",
     "deprecation",
-    "depd",
-    "warning",
+    "deprecation-warning",
+    "deprecate-function",
+    "deprecate-method",
+    "deprecate-property",
+    "deprecated-decorator",
     "decorator",
     "typescript",
+    "depd",
+    "util-deprecate",
+    "util.deprecate",
+    "emitWarning",
+    "obsolete",
+    "warning",
     "browser",
-    "nodejs"
+    "isomorphic",
+    "esm",
+    "api-versioning"
   ],
   "author": "mtorre4580",
   "type": "module",
