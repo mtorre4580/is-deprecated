@@ -43,5 +43,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18.x
-      - run: node -e "const { deprecate } = require('./dist/index.cjs'); deprecate(() => 1, { name: 'smoke' })()"
-      - run: node --input-type=module -e "const { deprecate } = await import('./dist/index.js'); deprecate(() => 1, { name: 'smoke' })()"
+      - name: Load CJS build
+        run: |
+          node -e "const { deprecate } = require('./dist/index.cjs'); deprecate(() => 1, { name: 'smoke' })()"
+      - name: Load ESM build
+        run: |
+          node --input-type=module -e "const { deprecate } = await import('./dist/index.js'); deprecate(() => 1, { name: 'smoke' })()"
