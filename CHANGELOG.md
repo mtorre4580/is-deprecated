@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.2 - 2026-11-15
+
+- docs: API reference site at https://mtorre4580.github.io/is-deprecated/ (TypeDoc), linked from the README and set as the package homepage.
+- types: export the `AnyFunction` type used in public signatures.
+
 ## 1.0.1 - 2026-11-15
 
 - docs: better npm description and keywords, README badges, comparison section and FAQ.
