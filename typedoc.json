@@ -1,0 +1,42 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "is-deprecated: runtime deprecation warnings for JavaScript and TypeScript",
+  "entryPoints": [
+    "src/index.ts"
+  ],
+  "tsconfig": "tsconfig.json",
+  "out": "docs-site",
+  "readme": "README.md",
+  "includeVersion": true,
+  "excludeInternal": true,
+  "excludePrivate": true,
+  "sort": [
+    "kind",
+    "instance-first",
+    "alphabetical-ignoring-documents"
+  ],
+  "hostedBaseUrl": "https://mtorre4580.github.io/is-deprecated/",
+  "useHostedBaseUrlForAbsoluteLinks": true,
+  "favicon": "deprecated.png",
+  "titleLink": "https://mtorre4580.github.io/is-deprecated/",
+  "navigationLinks": {
+    "GitHub": "https://github.com/mtorre4580/is-deprecated",
+    "npm": "https://www.npmjs.com/package/@mtorre4580/is-deprecated"
+  },
+  "sourceLinkTemplate": "https://github.com/mtorre4580/is-deprecated/blob/main/{path}#L{line}",
+  "customFooterHtml": "Runtime deprecation warnings for JavaScript and TypeScript: Node + browser, decorators, telemetry. MIT licensed.",
+  "validation": {
+    "notExported": true,
+    "invalidLink": true,
+    "notDocumented": false
+  },
+  "treatWarningsAsErrors": true,
+  "highlightLanguages": [
+    "bash",
+    "diff",
+    "javascript",
+    "json",
+    "shell",
+    "typescript"
+  ]
+}

@@ -22,3 +22,5 @@ profiler_status.txt
 # npm , yarn
 .npmrc
 .yalc
+# docs
+docs-site

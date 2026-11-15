@@ -6,6 +6,7 @@ import type {
   GlobalConfig,
 } from './types';
 
+/** Any callable function. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyFunction = (...args: any[]) => any;
 
@@ -22,6 +23,14 @@ const state: State = store[STATE_KEY] ?? (store[STATE_KEY] = { config: {}, seen:
 /**
  * Set global behavior. Only the keys you pass are changed; pass `undefined` to reset a key.
  * Returns the resulting configuration.
+ *
+ * @example
+ * ```ts
+ * configure({
+ *   mode: process.env.CI ? 'throw' : 'warn',
+ *   onDeprecation: (event) => metrics.increment('deprecated_api', { name: event.name }),
+ * });
+ * ```
  */
 export function configure(config: GlobalConfig): Readonly<GlobalConfig> {
   Object.assign(state.config, config);
@@ -206,6 +215,15 @@ function copyFunctionShape(target: AnyFunction, source: AnyFunction): void {
 /**
  * Wrap a function or class so every call (or `new`) reports a deprecation.
  * The wrapper keeps `this`, `new`, `name`, `length`, `prototype` and static members.
+ *
+ * @example
+ * ```ts
+ * export const getUsers = deprecate(getUsersImpl, {
+ *   since: '1.4.0',
+ *   removeIn: '2.0.0',
+ *   replacement: 'getUsersV2()',
+ * });
+ * ```
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function deprecate<T extends AnyFunction | (abstract new (...args: any[]) => any)>(
@@ -234,6 +252,14 @@ export function deprecate<T extends AnyFunction | (abstract new (...args: any[])
  * (reading the property, `typeof`, spreading or logging the object does not warn).
  * Deprecated methods run against the original object, so calls they make through `this`
  * are not reported again and private class fields keep working.
+ *
+ * @example
+ * ```ts
+ * export const api = deprecateMethod(apiImpl, ['getUsers', 'getUser'], {
+ *   removeIn: '2027-06-30',
+ *   url: 'https://example.com/migrate-users',
+ * });
+ * ```
  */
 export function deprecateMethod<T extends object>(
   obj: T,
@@ -279,6 +305,11 @@ export function deprecateMethod<T extends object>(
 /**
  * Redefine `obj[property]` in place so reading or writing it reports a deprecation.
  * Works with data properties and getters/setters. Returns the same object.
+ *
+ * @example
+ * ```ts
+ * deprecateProperty(config, 'retries', { replacement: 'config.maxRetries' });
+ * ```
  */
 export function deprecateProperty<T extends object>(
   obj: T,

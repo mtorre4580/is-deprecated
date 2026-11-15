@@ -28,6 +28,7 @@ jobs:
       - run: npm run build
       - run: npm run check:package
       - run: npm run size
+      - run: npm run docs
 
   # The published bundle has no Node APIs and targets ES2020: check it still loads on Node 18.
   runtime-node18:
