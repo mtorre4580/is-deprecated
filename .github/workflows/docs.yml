@@ -25,9 +25,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run docs
-      - name: Add robots.txt
-        run: |
-          printf 'User-agent: *\nAllow: /\nSitemap: https://mtorre4580.github.io/is-deprecated/sitemap.xml\n' > docs-site/robots.txt
+      # Static files served at the site root (e.g. Google Search Console verification). Do not delete.
+      - name: Copy static files
+        run: cp -R site/. docs-site/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs-site
